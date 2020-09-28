@@ -108,7 +108,7 @@
                 @endif
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#user" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                    <a class="nav-link" href="#user" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="user">
                         <i class="fas fa-users" style="color: #f4645f;"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('Users') }}</span>
                     </a>
@@ -128,96 +128,117 @@
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-camera text-orange"></i> {{ __('Videos') }}
+                    <a class="nav-link" href="#track" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="track">
+                        <i class="fas fa-chalkboard" style="color: #680088;"></i>
+                        <span class="nav-link-text" style="color: #680088;">{{ __('Tracks') }}</span>
                     </a>
-                    <div class="collapse show" id="navbar-examples">
+
+                    <div class="collapse" id="track">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profile.edit') }}">
-                                    {{ __('Add video') }}
+                                <a class="nav-link" href="/admin/tracks/create">
+                                    {{ __('New Track') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index') }}">
-                                    {{ __('Show videos') }}
+                                <a class="nav-link" href="/admin/tracks">
+                                    {{ __('Track Management') }}
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-diagnoses text-gray"></i> {{ __('Quizzes') }}
+                    <a class="nav-link" href="#course" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="course">
+                        <i class="fas fa-graduation-cap" style="color: #6f9702;"></i>
+                        <span class="nav-link-text" style="color: #6f9702;">{{ __('Courses') }}</span>
                     </a>
-                    <div class="collapse show" id="navbar-examples">
+
+                    <div class="collapse" id="course">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profile.edit') }}">
-                                    {{ __('Add quiz') }}
+                                <a class="nav-link" href="{{ route('users.create') }}">
+                                    {{ __('New Course') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('users.index') }}">
-                                    {{ __('Show quizzes') }}
+                                    {{ __('Course Management') }}
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-question text-purple"></i> {{ __('Questions') }}
+                    <a class="nav-link" href="#video" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="video">
+                        <i class="fas fa-camera text-orange"></i>
+                        <span class="nav-link-text text-orange">{{ __('Videos') }}</span>
                     </a>
-                    <div class="collapse show" id="navbar-examples">
+
+                    <div class="collapse" id="video">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('profile.edit') }}">
-                                    {{ __('Add question') }}
+                                <a class="nav-link" href="{{ route('users.create') }}">
+                                    {{ __('New Video') }}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('users.index') }}">
-                                    {{ __('Show questions') }}
+                                    {{ __('Video Management') }}
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="ni ni-key-25 text-info"></i> {{ __('Login') }}
+                    <a class="nav-link" href="#quiz" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="quiz">
+                        <i class="fas fa-diagnoses text-gray"></i>
+                        <span class="nav-link-text text-gray">{{ __('Quizzes') }}</span>
                     </a>
+
+                    <div class="collapse" id="quiz">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.create') }}">
+                                    {{ __('New Quiz') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.index') }}">
+                                    {{ __('Quiz Management') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="ni ni-circle-08 text-pink"></i> {{ __('Register') }}
+                    <a class="nav-link" href="#question" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="question">
+                        <i class="fas fa-question text-purple"></i>
+                        <span class="nav-link-text text-purple">{{ __('Questions') }}</span>
                     </a>
+
+                    <div class="collapse" id="question">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.create') }}">
+                                    {{ __('New Question') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('users.index') }}">
+                                    {{ __('Question Management') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
-            {{-- <!-- Divider -->
-            <hr class="my-3">
-            <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Documentation</h6>
-            <!-- Navigation -->
-            <ul class="navbar-nav mb-md-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
-                        <i class="ni ni-spaceship"></i> Getting started
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
-                        <i class="ni ni-palette"></i> Foundation
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
-                        <i class="ni ni-ui-04"></i> Components
-                    </a>
-                </li>
-            </ul> --}}
         </div>
     </div>
 </nav>
