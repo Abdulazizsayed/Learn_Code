@@ -12,43 +12,47 @@
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">Users</h3>
+                            <h3 class="mb-0">Videos</h3>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="/admin/users/create" class="btn btn-sm btn-primary">Add user</a>
+                            <a href="/admin/videos/create" class="btn btn-sm btn-primary">Add video</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-12">
-                                        </div>
+            </div>
 
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Link</th>
+                                <th scope="col">Course</th>
                                 <th scope="col">Creation Date</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                                @foreach ($users as $user)
+                                @forelse ($videos as $video)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
+                                    <td title="{{ $video->title }}">{{ \Str::limit($video->title, 30) }}</td>
                                     <td>
-                                        <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+                                        <a title="{{ $video->link }}" href="{{ $video->link }}">{{ \Str::limit($video->link, 30) }}</a>
                                     </td>
-                                    <td>{{ $user->created_at }}</td>
+                                    <td>
+                                        <a href="/admin/courses/{{ $video->course->title }}" title="{{ $video->course->title }}">{{ \Str::limit($video->course->title, 30) }}</a>
+                                    </td>
+                                    <td>{{ $video->created_at->diffForHumans() }}</td>
                                     <td class="text-right">
                                         <div class="dropdown">
                                             <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                <a class="dropdown-item" href="/admin/users/{{ $user->id }}/edit">Edit</a>
-                                                <form action="/admin/users/{{ $user->id }}" method="POST">
+                                                <a class="dropdown-item" href="{{ route('videos.edit', $video) }}">Edit</a>
+                                                <form action="{{ route('videos.destroy', $video) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="dropdown-item" type="submit">Delete</button>
@@ -57,13 +61,15 @@
                                         </div>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                <td>No videos found</td>
+                                @endforelse
                         </tbody>
                     </table>
                 </div>
                 <div class="card-footer py-4">
                     <nav class="d-flex justify-content-end" aria-label="...">
-                        {{ $users->links() }}
+                        {{ $videos->links() }}
                     </nav>
                 </div>
             </div>

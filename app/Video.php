@@ -8,7 +8,8 @@ class Video extends Model
 {
     protected $fillable = [
         'title',
-        'link'
+        'link',
+        'course_id',
     ];
 
     public function course()

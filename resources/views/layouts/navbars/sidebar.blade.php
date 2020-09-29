@@ -160,12 +160,12 @@
                     <div class="collapse" id="course">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.create') }}">
+                                <a class="nav-link" href="{{ route('courses.create') }}">
                                     {{ __('New Course') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index') }}">
+                                <a class="nav-link" href="{{ route('courses.index') }}">
                                     {{ __('Course Management') }}
                                 </a>
                             </li>
@@ -182,12 +182,12 @@
                     <div class="collapse" id="video">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.create') }}">
+                                <a class="nav-link" href="{{ route('videos.create') }}">
                                     {{ __('New Video') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index') }}">
+                                <a class="nav-link" href="{{ route('videos.index') }}">
                                     {{ __('Video Management') }}
                                 </a>
                             </li>
@@ -204,12 +204,12 @@
                     <div class="collapse" id="quiz">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.create') }}">
+                                <a class="nav-link" href="{{ route('quizzes.create') }}">
                                     {{ __('New Quiz') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index') }}">
+                                <a class="nav-link" href="{{ route('quizzes.index') }}">
                                     {{ __('Quiz Management') }}
                                 </a>
                             </li>

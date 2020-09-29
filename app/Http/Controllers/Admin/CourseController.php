@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Course;
+use App\Track;
+use App\Photo;
 
 class CourseController extends Controller
 {
@@ -14,7 +17,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.courses.index')->with('courses', Course::orderBy('id', 'desc')->paginate(15));
     }
 
     /**
@@ -24,7 +27,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.courses.create')->with('tracks', Track::all());
     }
 
     /**
@@ -35,7 +38,34 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'title' => 'required|min:20|max:150',
+            'status' => 'required|integer|in:0,1',
+            'link' => 'required|url',
+            'track_id' => 'required|integer',
+        ];
+
+        $this->validate($request, $rules);
+
+        $course = Course::create($request->all());
+
+        if ($course) {
+            // insert course image
+            if ($file = $request->file('photo')) {
+                $filename = $file->getClientOriginalName();
+                $fileExt = $file->getClientOriginalExtension();
+                $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.' . $fileExt;
+
+                if ($file->move('images', $file_to_store)) {
+                    Photo::create([
+                        'filename' => $file_to_store,
+                        'photoable_id' => $course->id,
+                        'photoable_type' => 'App\Course'
+                    ]);
+                }
+            }
+            return redirect('/admin/courses');
+        }
     }
 
     /**
@@ -55,9 +85,9 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Course $course)
     {
-        //
+        return view('admin.courses.edit', compact('course'))->with('tracks', Track::all());
     }
 
     /**
@@ -67,9 +97,41 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Course $course)
     {
-        //
+        $rules = [
+            'title' => 'required|min:20|max:150',
+            'status' => 'required|integer|in:0,1',
+            'link' => 'required|url',
+            'track_id' => 'required|integer',
+        ];
+
+        $this->validate($request, $rules);
+
+        $course->update($request->all());
+
+        // insert course image
+        if ($file = $request->file('photo')) {
+            $filename = $file->getClientOriginalName();
+            $fileExt = $file->getClientOriginalExtension();
+            $file_to_store = time() . '_' . explode('.', $filename)[0] . '_.' . $fileExt;
+
+            if ($file->move('images', $file_to_store)) {
+                $photo = $course->photo;
+                if ($photo) {
+                    unlink('images/' . $photo->filename);
+                    $photo->filename = $file_to_store;
+                    $photo->save();
+                } else {
+                    Photo::create([
+                        'filename' => $file_to_store,
+                        'photoable_id' => $course->id,
+                        'photoable_type' => 'App\Course'
+                    ]);
+                }
+            }
+        }
+        return redirect('/admin/courses');
     }
 
     /**
@@ -78,8 +140,17 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        //
+
+        // delete photo from db
+        if ($course->photo) {
+            // delete photo from server
+            unlink('images/' . $course->photo->filename);
+            $course->photo->delete();
+        }
+
+        $course->delete();
+        return redirect('/admin/courses');
     }
 }
