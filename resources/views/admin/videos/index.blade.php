@@ -37,12 +37,16 @@
                         <tbody>
                                 @forelse ($videos as $video)
                                 <tr>
-                                    <td title="{{ $video->title }}">{{ \Str::limit($video->title, 30) }}</td>
+                                    <td title="{{ $video->title }}">
+                                        <a href="{{ route('videos.show', $video) }}">
+                                            {{ \Str::limit($video->title, 30) }}
+                                        </a>
+                                    </td>
                                     <td>
                                         <a title="{{ $video->link }}" href="{{ $video->link }}">{{ \Str::limit($video->link, 30) }}</a>
                                     </td>
                                     <td>
-                                        <a href="/admin/courses/{{ $video->course->title }}" title="{{ $video->course->title }}">{{ \Str::limit($video->course->title, 30) }}</a>
+                                        <a href="/admin/courses/{{ $video->course->id }}" title="{{ $video->course->title }}">{{ \Str::limit($video->course->title, 30) }}</a>
                                     </td>
                                     <td>{{ $video->created_at->diffForHumans() }}</td>
                                     <td class="text-right">

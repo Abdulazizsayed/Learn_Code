@@ -36,7 +36,11 @@
                         <tbody>
                                 @forelse ($quizzes as $quiz)
                                 <tr>
-                                    <td title="{{ $quiz->title }}">{{ \Str::limit($quiz->title, 30) }}</td>
+                                    <td title="{{ $quiz->title }}">
+                                        <a href="{{ route('quizzes.show', $quiz) }}">
+                                            {{ \Str::limit($quiz->title, 30) }}
+                                        </a>
+                                    </td>
                                     <td>
                                         <a href="/admin/courses/{{ $quiz->course->title }}" title="{{ $quiz->course->title }}">{{ \Str::limit($quiz->course->title, 30) }}</a>
                                     </td>
