@@ -27,7 +27,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('admin.courses.create')->with('tracks', Track::all());
+        return view('admin.courses.create')->with('tracks', Track::orderBy('id', 'desc')->get());
     }
 
     /**

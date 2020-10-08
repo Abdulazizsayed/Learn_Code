@@ -70,7 +70,9 @@
                                 <div class="form-group{{ $errors->has('quiz') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="quiz">Quiz</label>
                                     <select name="quiz_id" class="form-control" id="quiz" required>
+                                        @foreach ($quizzes as $quiz)
                                         <option value="{{ $quiz->id }}"{{ old('quiz_id') == $quiz->id ? ' selected' : '' }}>{{ $quiz->title }}</option>
+                                        @endforeach
                                     </select>
 
                                     @if ($errors->has('quiz'))

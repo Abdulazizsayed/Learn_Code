@@ -1,7 +1,7 @@
 @extends('layouts.app', ['title' => __('Question Management')])
 
 @section('content')
-    @include('admin.users.partials.header', ['title' => __('Add Question')])
+    @include('admin.users.partials.header', ['title' => __('Edit Question')])
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -18,13 +18,15 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('questions.store') }}" autocomplete="off">
+                        <form method="post" action="{{ route('questions.update', $question) }}" autocomplete="off" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
+
                             <h6 class="heading-small text-muted mb-4">{{ __('Question information') }}</h6>
                             <div class="pl-lg-4">
                                 <div class="form-group{{ $errors->has('title') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Title') }}</label>
-                                    <input type="text" name="title" id="input-title" class="form-control form-control-alternative{{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="{{ __('Title') }}" value="{{ old('title') }}" required autofocus>
+                                    <input type="text" name="title" id="input-title" class="form-control form-control-alternative{{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="{{ __('Title') }}" value="{{ old('title', $question->title) }}" required autofocus>
 
                                     @if ($errors->has('title'))
                                         <span class="invalid-feedback" role="alert">
@@ -34,7 +36,7 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('answers') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-answers">{{ __('Answers') }}</label>
-                                    <input type="text" name="answers" id="input-answers" class="form-control form-control-alternative{{ $errors->has('answers') ? ' is-invalid' : '' }}" placeholder="{{ __('Answers') }}" value="{{ old('answers') }}" required autofocus>
+                                    <input type="text" name="answers" id="input-answers" class="form-control form-control-alternative{{ $errors->has('answers') ? ' is-invalid' : '' }}" placeholder="{{ __('Answers') }}" value="{{ old('answers', $question->answers) }}" required autofocus>
 
                                     @if ($errors->has('answers'))
                                         <span class="invalid-feedback" role="alert">
@@ -44,7 +46,7 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('right_answer') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-right_answer">{{ __('Right answer') }}</label>
-                                    <input type="text" name="right_answer" id="input-right_answer" class="form-control form-control-alternative{{ $errors->has('right_answer') ? ' is-invalid' : '' }}" placeholder="{{ __('Right answer') }}" value="{{ old('right_answer') }}" required autofocus>
+                                    <input type="text" name="right_answer" id="input-right_answer" class="form-control form-control-alternative{{ $errors->has('right_answer') ? ' is-invalid' : '' }}" placeholder="{{ __('Right answer') }}" value="{{ old('right_answer', $question->right_answer) }}" required autofocus>
 
                                     @if ($errors->has('right_answer'))
                                         <span class="invalid-feedback" role="alert">
@@ -53,14 +55,9 @@
                                     @endif
                                 </div>
                                 <div class="form-group{{ $errors->has('score') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="score">{{ __('Score') }}</label>
-                                    <select name="score" class="form-control" id="score" required>
-                                        <option value="5"{{ old('quiz_id') == 5 ? ' selected' : '' }}>5</option>
-                                        <option value="10"{{ old('quiz_id') == 10 ? ' selected' : '' }}>10</option>
-                                        <option value="15"{{ old('quiz_id') == 15 ? ' selected' : '' }}>15</option>
-                                        <option value="20"{{ old('quiz_id') == 20 ? ' selected' : '' }}>20</option>
-                                        <option value="25"{{ old('quiz_id') == 25 ? ' selected' : '' }}>25</option>
-                                    </select>
+                                    <label class="form-control-label" for="input-score">{{ __('Score') }}</label>
+                                    <input type="number" name="score" id="input-score" class="form-control form-control-alternative{{ $errors->has('score') ? ' is-invalid' : '' }}" placeholder="{{ __('Score') }}" value="{{ old('score', $question->score) }}" required autofocus>
+
                                     @if ($errors->has('score'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('score') }}</strong>
@@ -70,7 +67,9 @@
                                 <div class="form-group{{ $errors->has('quiz') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="quiz">Quiz</label>
                                     <select name="quiz_id" class="form-control" id="quiz" required>
-                                        <option value="{{ $quiz->id }}"{{ old('quiz_id') == $quiz->id ? ' selected' : '' }}>{{ $quiz->title }}</option>
+                                        @foreach ($quizzes as $quiz)
+                                        <option value="{{ $quiz->id }}"{{ old('quiz_id', $question->quiz_id) == $quiz->id ? ' selected' : '' }}>{{ $quiz->title }}</option>
+                                        @endforeach
                                     </select>
 
                                     @if ($errors->has('quiz'))

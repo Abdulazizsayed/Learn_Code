@@ -26,7 +26,7 @@
                             <div class="pl-lg-4">
                                 <div class="form-group{{ $errors->has('title') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-title">{{ __('Title') }}</label>
-                                    <input type="text" name="title" id="input-title" class="form-control form-control-alternative{{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="{{ __('Title') }}" value="{{ $course->title }}" required autofocus>
+                                    <input type="text" name="title" id="input-title" class="form-control form-control-alternative{{ $errors->has('title') ? ' is-invalid' : '' }}" placeholder="{{ __('Title') }}" value="{{ old('title', $course->title) }}" required autofocus>
 
                                     @if ($errors->has('title'))
                                         <span class="invalid-feedback" role="alert">
@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('link') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-link">{{ __('Link') }}</label>
-                                    <input type="url" name="link" id="input-link" class="form-control form-control-alternative{{ $errors->has('link') ? ' is-invalid' : '' }}" placeholder="{{ __('Link') }}" value="{{ $course->link }}" required>
+                                    <input type="url" name="link" id="input-link" class="form-control form-control-alternative{{ $errors->has('link') ? ' is-invalid' : '' }}" placeholder="{{ __('Link') }}" value="{{ old('link', $course->link) }}" required>
 
                                     @if ($errors->has('link'))
                                         <span class="invalid-feedback" role="alert">
@@ -63,8 +63,8 @@
                                 <div class="form-group{{ $errors->has('status') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="price">Pricing</label>
                                     <select name="status" class="form-control" id="price" required>
-                                        <option value="0"{{ $course->status == 0 ? ' selected' : '' }}>Free</option>
-                                        <option value="1"{{ $course->status == 1 ? ' selected' : '' }}>Paid</option>
+                                        <option value="0"{{ old('status', $course->status) == 0 ? ' selected' : '' }}>Free</option>
+                                        <option value="1"{{ old('status', $course->status) == 1 ? ' selected' : '' }}>Paid</option>
                                     </select>
 
                                     @if ($errors->has('status'))
@@ -77,7 +77,7 @@
                                     <label class="form-control-label" for="track">Course track</label>
                                     <select name="track_id" class="form-control" id="track" required>
                                         @foreach ($tracks as $track)
-                                        <option value="{{ $track->id }}"{{ $course->track_id == $track->id ? ' selected' : '' }}>{{ $track->name }}</option>
+                                        <option value="{{ $track->id }}"{{ old('track_id', $course->track_id) == $track->id ? ' selected' : '' }}>{{ $track->name }}</option>
                                         @endforeach
                                     </select>
 

@@ -138,11 +138,6 @@
                     <div class="collapse" id="track">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="/admin/tracks/create">
-                                    {{ __('New Track') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="/admin/tracks">
                                     {{ __('Track Management') }}
                                 </a>
@@ -226,12 +221,12 @@
                     <div class="collapse" id="question">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.create') }}">
+                                <a class="nav-link" href="{{ route('questions.create') }}">
                                     {{ __('New Question') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index') }}">
+                                <a class="nav-link" href="{{ route('questions.index') }}">
                                     {{ __('Question Management') }}
                                 </a>
                             </li>
