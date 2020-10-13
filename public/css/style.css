@@ -48,3 +48,32 @@ body {
 	padding: 8px;
 	border-radius: 10px 20px;
 }
+
+.home_picture {
+    height: 666px;
+    background-image: url('../images/home_default.jpg');
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-size: cover;
+    position: relative;
+}
+
+.home_picture .background-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.home_picture .background-text p {
+    font-size: 50px;
+    color: #FFF;
+}
+
+.home_picture .background-text .free {
+    color: #82ff9e;
+}
+
+.home_picture .background-text a {
+    font-size: 30px;
+}
