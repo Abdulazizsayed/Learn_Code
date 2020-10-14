@@ -10,7 +10,7 @@ body {
 }
 
 
-/* Home page */
+/* Navbar */
 
 .search-form {
 	margin-left: 250px;
@@ -49,6 +49,8 @@ body {
 	border-radius: 10px 20px;
 }
 
+/* Header */
+
 .home_picture {
     height: 666px;
     background-image: url('../images/home_default.jpg');
@@ -78,6 +80,8 @@ body {
     font-size: 30px;
 }
 
+/* My courses (Carousal) */
+
 .controls-top a {
     border-radius: 50%;
     background-color: #1C5996;
@@ -92,4 +96,16 @@ body {
     -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     transition: all .2s ease-in-out;
+}
+
+/* Famous track courses */
+
+.famous-courses .course {
+    border: #DDD solid 2px;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.famous-courses .course .course-img {
+    width: 100%;
 }

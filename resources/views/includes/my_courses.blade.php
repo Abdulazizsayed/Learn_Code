@@ -51,7 +51,7 @@
                             <p class="card-text">
                                 Track: <a href="#">{{ \Str::limit($course->track->name, 20) }}</a>
                             </p>
-                            <a class="btn btn-primary">Button</a>
+                            <a class="btn btn-primary">Go to course</a>
                         </div>
                     </div>
                 </div>
