@@ -5,7 +5,7 @@
                 Start learning for <span class="free"> <strong> Free </strong></span>
             </p>
             <p>
-                Join {{ \App\User::all()->count() }} Users in our website!
+                {{ \App\Course::all()->count() }} Courses in {{ \App\Track::all()->count() }} Tracks are available for you!
             </p>
             <a class="btn btn-success" href="/register">Start learning</a>
         </div>
