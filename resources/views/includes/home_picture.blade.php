@@ -8,6 +8,7 @@
                 {{ \App\Course::all()->count() }} Courses in {{ \App\Track::all()->count() }} Tracks are available for you!
             </p>
             <a class="btn btn-success" href="/register">Start learning</a>
+            <a class="btn btn-primary" href="/register">My courses</a>
         </div>
     </div>
 </div>
