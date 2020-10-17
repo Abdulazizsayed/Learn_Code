@@ -35,21 +35,17 @@
 
                 <div class="col-md-4">
                     <div class="card mb-2 bg-light">
-                        @if ($course->photo)
-                        <img class="card-img-top"
-                            src="/images/{{ $course->photo->filename }}"
+                        <a href="/courses/{{ $course->slug }}">
+                            <img class="card-img-top"
+                            src="/images/{{ $course->photo ? $course->photo->filename : 'default.jpg' }}"
                             alt="Course image">
-                        @else
-                        <img class="card-img-top"
-                            src="/images/default.jpg"
-                            alt="Card image cap">
-                        @endif
+                        </a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="{{ $course->link }}" title="{{ $course->title }}">{{ \Str::limit($course->title, 20) }}</a>
+                                <a href="/courses/{{ $course->slug }}" title="{{ $course->title }}">{{ \Str::limit($course->title, 20) }}</a>
                             </h4>
                             <p class="card-text">
-                                Track: <a href="#">{{ \Str::limit($course->track->name, 20) }}</a>
+                                Track: <a href="/tracks/{{ $course->track->name }}">{{ \Str::limit($course->track->name, 20) }}</a>
                             </p>
                             <a class="btn btn-primary">Go to course</a>
                         </div>

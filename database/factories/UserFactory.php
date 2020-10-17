@@ -37,13 +37,16 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->define(Track::class, function (Faker $faker) {
     return [
-        'name' => $faker->paragraph(2),
+        'name' => $faker->word,
     ];
 });
 
 $factory->define(Course::class, function (Faker $faker) {
+    $title = $faker->sentence;
     return [
-        'title' => $faker->paragraph,
+        'title' => $title,
+        'description' => $faker->paragraph,
+        'slug' => strtolower(str_replace(' ', '-', $title)),
         'status' => $faker->randomElement([0, 1]),
         'link' => $faker->url,
         'track_id' => Track::all()->random()->id,
@@ -52,7 +55,7 @@ $factory->define(Course::class, function (Faker $faker) {
 
 $factory->define(Video::class, function (Faker $faker) {
     return [
-        'title' => $faker->paragraph,
+        'title' => $faker->sentence,
         'link' => $faker->url,
         'course_id' => Course::all()->random()->id,
     ];
@@ -60,13 +63,13 @@ $factory->define(Video::class, function (Faker $faker) {
 
 $factory->define(Quiz::class, function (Faker $faker) {
     return [
-        'title' => $faker->paragraph,
+        'title' => $faker->sentence,
         'course_id' => Course::all()->random()->id,
     ];
 });
 
 $factory->define(Question::class, function (Faker $faker) {
-    $answers = $faker->paragraph(4);
+    $answers = $faker->sentence(4);
     $right_answer = $faker->randomElement(explode(' ', $answers));
 
     return [

@@ -8,11 +8,11 @@
         @forelse ($track->courses()->limit(4)->get() as $course)
         <div class="col-sm-3">
             <div class="course pb-2">
-                <a href="#">
+                <a href="/courses/{{ $course->slug }}">
                     <img class="course-img" src="/images/{{ $course->photo ? $course->photo->filename : 'default.jpg' }}" alt="Track image">
                 </a>
                 <h5 class="p-2">
-                    <a href="#">{{ \Str::limit($course->title, 20) }}</a>
+                    <a href="/courses/{{ $course->slug }}">{{ \Str::limit($course->title, 20) }}</a>
                 </h5>
                 <span class="{{ $course->status ? 'text-danger' : 'text-success' }} pl-2">{{ $course->status ? 'Paid' : 'Free' }}</span>
                 <span class="float-right pr-2" title="Users enrolled">{{ $course->users->count() }}</span>

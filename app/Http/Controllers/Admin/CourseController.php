@@ -40,6 +40,7 @@ class CourseController extends Controller
     {
         $rules = [
             'title' => 'required|min:20|max:150',
+            'description' => 'required|min:20|max:1000',
             'status' => 'required|integer|in:0,1',
             'link' => 'required|url',
             'track_id' => 'required|integer',
