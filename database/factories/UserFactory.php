@@ -69,8 +69,8 @@ $factory->define(Quiz::class, function (Faker $faker) {
 });
 
 $factory->define(Question::class, function (Faker $faker) {
-    $answers = $faker->sentence(4);
-    $right_answer = $faker->randomElement(explode(' ', $answers));
+    $answers = str_replace(' ', ',', $faker->sentence(4));
+    $right_answer = $faker->randomElement(explode(',', $answers));
 
     return [
         'title' => $faker->paragraph,

@@ -3,6 +3,9 @@
 @section('content')
 
 <div class="container mt-5">
+    @empty(!session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endempty
     <div class="card text-white bg-primary mb-3">
         <div class="card-body p-0">
             <div class="row">
@@ -52,7 +55,7 @@
                     @forelse ($course->quizzes as $quiz)
                     <li class="list-group-item bg-light quiz">
                         <i class="fas fa-question text-primary mr-3"></i>
-                        <a href="/quiz/{{ $quiz->id }}" target="_blank">{{ $quiz->title }}</a>
+                        <a href="/courses/{{ $course->slug }}/quizzes/{{ $quiz->title }}" target="_blank">{{ $quiz->title }}</a>
                     </li>
                     @empty
                     <div class="alert alert-danger">

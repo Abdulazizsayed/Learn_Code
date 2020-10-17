@@ -42,6 +42,7 @@ class QuestionController extends Controller
             'answers' => 'required|min:10|max:1000',
             'right_answer' => 'required|min:2|max:50|in:' . str_replace(' ', ',', trim($request->answers)),
             'score' => 'required|integer|in:5,10,15,20,25,30',
+            'score' => 'required|string|in:text,checkbox',
             'quiz_id' => 'required|integer',
         ];
 

@@ -78,6 +78,19 @@
                                         </span>
                                     @endif
                                 </div>
+                                <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="type">Type</label>
+                                    <select name="type" class="form-control" id="type" required>
+                                        <option value="text"{{ old('type') == 5 ? ' selected' : '' }}>Text</option>
+                                        <option value="checkbox"{{ old('type') == 10 ? ' selected' : '' }}>Checkbox</option>
+                                    </select>
+
+                                    @if ($errors->has('type'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('type') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>

@@ -42,7 +42,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="/admin/courses/{{ $quiz->course->title }}" title="{{ $quiz->course->title }}">{{ \Str::limit($quiz->course->title, 30) }}</a>
+                                        <a href="/admin/courses/{{ $quiz->course->id }}" title="{{ $quiz->course->title }}">{{ \Str::limit($quiz->course->title, 30) }}</a>
                                     </td>
                                     <td>{{ $quiz->created_at->diffForHumans() }}</td>
                                     <td class="text-right">

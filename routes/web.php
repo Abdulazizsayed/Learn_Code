@@ -16,15 +16,14 @@ use Illuminate\Support\Facades\Auth;
 
 // User routes
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/courses/{slug}', 'CourseController@index');
-Route::get('/courses/{slug}/quizzes/{quiz}', 'QuizController@index');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/courses/{slug}', 'CourseController@index');
+    Route::get('/courses/{slug}/quizzes/{name}', 'QuizController@index');
+    Route::post('/courses/{slug}/quizzes/{name}', 'QuizController@submit');
+});
 
 // Admin routes
 
@@ -48,3 +47,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::put('/admin/profile', ['as' => 'profile.update', 'uses' => 'Admin\ProfileController@update']);
     Route::put('/admin/profile/password', ['as' => 'profile.password', 'uses' => 'Admin\ProfileController@password']);
 });
+
+// For tests
+// Route::get('/test', function () {
+//     return
+// });
