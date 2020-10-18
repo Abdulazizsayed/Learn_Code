@@ -11,6 +11,7 @@
                         <h5 class="card-title">{{ $course->title }}</h5>
                         <p class="card-text">{{ $course->description }}</p>
                         <a href="/courses/{{ $course->slug }}" class="btn btn-primary">Go to course</a>
+                        <span class="float-right">{{ $course->users->count() }} users enrolled</span>
                     </div>
                 </div>
                 @empty

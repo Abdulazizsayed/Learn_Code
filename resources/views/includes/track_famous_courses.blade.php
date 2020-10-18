@@ -1,5 +1,4 @@
 <div class="container famous-courses mt-5">
-    <hr>
     @foreach ($tracks as $track)
     <h3 class="mt-5 mb-4">
         Last <a href="#">{{ \Str::limit($track->name, 20) }}</a> Courses
@@ -34,14 +33,15 @@
             </div>
         </div>
         @endif
-        @if ($loop->index == 2)
+        @auth
+            @if ($loop->index == 2)
     </div>
     <hr>
     <h3 class="mt-5 mb-4">
-        Recommended courses for you
+            Recommended courses for you
     </h3>
     <div class="row">
-            @forelse ($recommended_courses as $recommended_course)
+                @forelse ($recommended_courses as $recommended_course)
         <div class="col-sm-3">
             <div class="course pb-2">
                 <a href="#">
@@ -54,10 +54,13 @@
                 <span class="float-right pr-2" title="Users enrolled">{{ $recommended_course->users->count() }}</span>
             </div>
         </div>
-            @empty
-            hello
-            @endforelse
-        @endif
+                @empty
+            <div class="col-sm-12">
+                <p class="lead text-center">No recommended courses for you!</p>
+            </div>
+                @endforelse
+            @endif
+        @endauth
     </div>
     <hr>
     @endforeach

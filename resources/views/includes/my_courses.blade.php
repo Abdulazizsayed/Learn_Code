@@ -61,6 +61,6 @@
 
     </div>
     <!--/.Slides-->
-
+    <hr>
 </div>
 <!--/.Carousel Wrapper-->

@@ -17,14 +17,15 @@ use Illuminate\Support\Facades\Auth;
 // User routes
 
 Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/search', 'SearchController@index');
+Route::get('/tracks/{name}', 'TrackController@index');
+
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/', 'HomeController@index')->name('home');
     Route::get('/courses/{slug}', 'CourseController@index');
     Route::get('/courses/{slug}/quizzes/{name}', 'QuizController@index');
     Route::post('/courses/{slug}/quizzes/{name}', 'QuizController@submit');
-    Route::get('/search', 'SearchController@index');
-    Route::get('/tracks/{name}', 'TrackController@index');
 });
 
 // Admin routes
