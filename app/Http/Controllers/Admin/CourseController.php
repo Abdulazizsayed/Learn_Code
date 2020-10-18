@@ -48,7 +48,14 @@ class CourseController extends Controller
 
         $this->validate($request, $rules);
 
-        $course = Course::create($request->all());
+        $course = Course::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'slug' => strtolower(str_replace(' ', '-', $request->title)),
+            'status' => $request->status,
+            'link' => $request->link,
+            'track_id' => $request->track_id,
+        ]);
 
         if ($course) {
             // insert course image

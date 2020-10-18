@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/courses/{slug}', 'CourseController@index');
     Route::get('/courses/{slug}/quizzes/{name}', 'QuizController@index');
     Route::post('/courses/{slug}/quizzes/{name}', 'QuizController@submit');
+    Route::get('/search', 'SearchController@index');
+    Route::get('/tracks/{name}', 'TrackController@index');
 });
 
 // Admin routes

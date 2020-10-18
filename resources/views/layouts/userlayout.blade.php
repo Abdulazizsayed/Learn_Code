@@ -27,8 +27,9 @@
                 </button>
 
                 <div class="collapse navbar-collapse links" id="navbarSupportedContent">
-                    <form class="form-inline my-2 my-lg-0 search-form">
-                        <input placeholder="find your course..." class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="form-inline my-2 my-lg-0 search-form" method="GET" action="/search">
+                        @csrf
+                        <input name="q" placeholder="find your course..." class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     </form>
 
                     <ul class="navbar-nav ml-auto">
