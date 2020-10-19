@@ -11,4 +11,14 @@ class CourseController extends Controller
     {
         return view('course')->with(['course' => Course::where('slug', $slug)->first()]);
     }
+
+    public function enroll($slug)
+    {
+        $user = auth()->user();
+        $course = Course::where('slug', $slug)->first();
+        $user->courses()->attach([$course->id]);
+
+        session()->flash('enrolled', "You've been enrolled in this course");
+        return redirect("/courses/$slug");
+    }
 }

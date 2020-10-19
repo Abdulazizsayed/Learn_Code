@@ -24,8 +24,12 @@ Route::get('/tracks/{name}', 'TrackController@index');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/courses/{slug}', 'CourseController@index');
+    Route::post('/courses/{slug}', 'CourseController@enroll');
     Route::get('/courses/{slug}/quizzes/{name}', 'QuizController@index');
     Route::post('/courses/{slug}/quizzes/{name}', 'QuizController@submit');
+    Route::get('/mycourses', 'MyCoursesController@index');
+    Route::post('/profile', 'ProfileController@update');
+    Route::get('/profile', 'ProfileController@index');
 });
 
 // Admin routes

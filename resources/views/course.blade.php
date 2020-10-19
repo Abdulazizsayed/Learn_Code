@@ -6,6 +6,9 @@
     @empty(!session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endempty
+    @empty(!session('enrolled'))
+        <div class="alert alert-success">{{ session('enrolled') }}</div>
+    @endempty
     <div class="card text-white bg-primary mb-3">
         <div class="card-body p-0">
             <div class="row">
@@ -19,7 +22,23 @@
                         <div class="col-sm-6">
                             <span class="badge {{ $course->status ? "badge-danger" : "badge-success" }}">{{ $course->status ? "Paid" : "Free" }}</span>
                         </div>
-                        <div class="col-sm-6">{{ $course->users->count() }} enrolled</div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-6 pt-2">
+                                    {{ $course->users->count() }} enrolled
+                                </div>
+                                <div class="col-sm-6">
+                                    @if (auth()->user()->courses()->where('id', $course->id)->get()->count())
+                                    <button class="btn btn-success" title="You enrolled already" disabled>Enrolled</button>
+                                    @else
+                                    <form action="/courses/{{ $course->slug }}" method="POST">
+                                        @csrf
+                                        <input class="btn btn-success" value="Enroll now" type="submit" />
+                                    </form>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -28,6 +47,7 @@
             </div>
         </div>
     </div>
+    @if (auth()->user()->courses()->where('id', $course->id)->get()->count())
     <div class="videos">
         <div class="row">
             <div class="col-sm-12">
@@ -66,6 +86,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 
 <!-- Modal -->
